@@ -13,12 +13,12 @@ public class CandidateValidator implements Predicate<Candidate> {
 
     @Override
     public boolean test(Candidate candidate) {
-        String[] periods = candidate.getPeriodsInUkr().split(SEPARATOR_FOR_PERIODS);
+        String[] periods = candidate.getPeriodsInUkr().trim().split(SEPARATOR_FOR_PERIODS);
         int totalPeriod = Arrays.stream(periods)
                 .mapToInt(period -> {
                     String[] years = period.split(SEPARATOR_FOR_DATES);
-                    return Integer.parseInt(years[1])
-                            - Integer.parseInt(years[0]);
+                    return Integer.parseInt(years[1].trim())
+                            - Integer.parseInt(years[0].trim());
                 })
                 .sum();
 
